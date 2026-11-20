@@ -1,5 +1,8 @@
 # Vt4Fun — jogos e diversão para Discord
 
+[![Deploy to Silly Development](https://sillydev.co.uk/deploy/button.svg)](https://sillydev.co.uk/deploy?repository=https://github.com/vtcaua2014-dev/vt-bot&runtime=nodejs&branch=main)
+
+
 Projeto inicial em **Node.js 20+ / discord.js 14**, com 25 minijogos, roleplays, economia fictícia, Gartic, adivinhador original, figurinhas de mídia existente e IA Luna 1.5X por Ollama.
 
 > **Estado:** MVP de código-fonte. O núcleo foi verificado por testes locais de lógica e checagem de sintaxe. Não foi conectado a uma aplicação Discord real: você precisa criar sua aplicação e fornecer um token privado. Alguns minijogos são versões simplificadas, não clones comerciais.
@@ -76,6 +79,23 @@ Desabilite IA temporariamente definindo `AI_ENABLED=false`. Histórico da IA é 
 | `/config idioma` | Alterar idioma (Gerenciar Servidor) |
 | `/config cargo` | Definir **único** cargo que menciona a IA |
 | `/painel` | Mostrar painel de configuração |
+
+
+## Hospedagem recomendada — Silly Development
+
+**[Implantar Vt4Fun na Silly Development](https://sillydev.co.uk/deploy?repository=https://github.com/vtcaua2014-dev/vt-bot&runtime=nodejs&branch=main)** (Node.js, branch `main`).
+
+1. Abra o link, entre na conta Silly Development, crie um servidor gratuito do tipo **Node.js** (ou selecione um servidor Node.js livre) e confirme a implantação do repositório `vtcaua2014-dev/vt-bot`.
+2. No painel, em **Startup**, configure `MAIN_FILE=index.js`. O arquivo `index.js` na raiz foi criado para o hospedeiro e executa `src/index.js`.
+3. Em **Startup** / variáveis privadas do servidor, defina `DISCORD_TOKEN` e `DISCORD_CLIENT_ID`. Opcional: `DISCORD_GUILD_ID` para testar slash commands em um servidor. **Nunca cole o token em arquivo público, README, issue ou commit.**
+4. Para registrar comandos automaticamente na inicialização, defina `REGISTER_COMMANDS_ON_START=true`. Quando já estiverem registrados, pode mudar para `false` para evitar atualizações desnecessárias a cada reinício. Alternativamente execute `npm run deploy:commands` no console com as variáveis carregadas, uma vez.
+5. Defina `DATA_PATH=./data/db.json` para gravar Funcoins, configurações e álbum no disco do servidor. Faça backups regulares: **trocar/recriar servidor ou reimplantar sem preservar os dados pode apagá-los**. O código usa JSON e suporta apenas uma instância.
+6. Para funcionar sem um Ollama privado configurado, comece com `AI_ENABLED=false`. O servidor de 256 MB **não comporta o próprio modelo `llama3.2:3b`**; se desejar IA, conecte depois a um serviço externo privado e seguro por meio de `OLLAMA_URL` e `OLLAMA_MODEL` (nunca exponha a porta 11434 sem autenticação).
+7. Inicie o bot e confira o console para a mensagem `Vt4Fun conectado como ...`. Se não aparecer, verifique variáveis, intents de Discord e erros exibidos.
+
+A Silly Development oferece um runtime Node.js 24/7, mas a execução só começa depois de concluir a criação/seleção do servidor em sua conta. O botão de implantação **não** cria um bot no Discord; crie antes a aplicação em <https://discord.com/developers/applications>. Habilite Message Content Intent para as menções automáticas conforme a configuração do bot.
+
+Documentação oficial: <https://sillydev.co.uk/docs/panel/templates> e <https://sillydev.co.uk/discord-bot-hosting>.
 
 ## 4. Hospedagem — Railway
 
